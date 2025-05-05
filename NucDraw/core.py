@@ -2,40 +2,37 @@ import RNA
 import numpy as np
 import matplotlib.pyplot as plt
 from typing import List, Tuple
+from utils import rotate, flatten
 
-class nucleic_graph:
-    def __init__(self, mfe, sz=5, degree=0, 
-                 bckwargs={'lw':1, 'color':'k'}, 
-                 bpkwargs={'lw':1, 'c':'red'}, 
-                 scwargs={'s':10, 'c':'k'}):
-        
-        self.mfe = mfe
-        self.sz = sz
-        self.spacer = 1
-        self.degree = degree
-        
-        self.generate_db_structure()
-        self.generate_coordinates_and_pairs()
+class NucDraw:
+    def __init__(self, dot_bracket_structure):
+        self.dot_bracket_structure = dot_bracket_structure
+    
+    def generate(self, spacer=1, degree=0):
+        self.generate_db_structure(spacer)
+        self.generate_coordinates_and_pairs(degree)
 
-    def generate_db_structure(self):
+    def generate_db_structure(self, spacer):
+        self.spacer = spacer
+
         # Let's check whether it is a complex or single strand
-        if '+' in self.mfe:
-            complex = self.mfe.split('+')
+        if '+' in self.dot_bracket_structure:
+            complex = self.dot_bracket_structure.split('+')
             self.l = [len(entry) for entry in complex]
             self.dot_bracket_str = "".join(flatten([[entry, '.'*self.spacer] for entry in complex]))
 
         else:
-            self.dot_bracket_str = self.mfe
+            self.dot_bracket_str = self.dot_bracket_structure
             self.l = []
 
-    def generate_coordinates_and_pairs(self):
+    def generate_coordinates_and_pairs(self, degree):
         vrna_coords = RNA.get_xy_coordinates(self.dot_bracket_str)
         coords = []
         for i, _ in enumerate(self.dot_bracket_str):
             coord = (vrna_coords.get(i).X, vrna_coords.get(i).Y)
             coords.append(coord)
             
-        coords = rotate(coords, np.mean(coords, axis=0), self.degree)
+        coords = rotate(coords, np.mean(coords, axis=0), degree)
 
         self.coords = np.array(coords)
         self.pairs = self.parse_dot_bracket()
@@ -59,8 +56,11 @@ class nucleic_graph:
         
         return pairs
 
-    def plotter(self, bpkwargs, bckwargs, scwargs):
-        fig, ax = plt.subplots(figsize=(self.sz, self.sz))
+    def plotter(self, sz=5, 
+                 bckwargs={'lw':1, 'color':'k'}, 
+                 bpkwargs={'lw':1, 'c':'red'}, 
+                 scwargs={'s':10, 'c':'k'}):
+        fig, ax = plt.subplots(figsize=(sz, sz))
 
         # Manually retrieve paired bases and relative coordinates to plot linkers
         for entry in self.pairs:
