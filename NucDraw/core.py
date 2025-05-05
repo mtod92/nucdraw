@@ -104,20 +104,32 @@ class NucDraw:
         
         self.ax = ax
 
-    def plot_sequence(self, sequence: str, fntsz: int = 12, circle_size: float=5, circle_color = ['#1ea3eb', '#f5370c', '#22c716', '#e6d815']):
+    def plot_circles(self, sequence: str = '', circle_size: float=5, circle_color = ['#1ea3eb', '#f5370c', '#22c716', '#e6d815']):
+
+        if len(sequence) == 0: # no sequence is passed
+            if isinstance(circle_color, list): # you are passing a list of colors, but they cannot be mapped because of no sequence
+                color_table = circle_color[0]
+            else:
+                color_table = circle_color
+
+            for i in range(len(self.coords)):
+                self.ax.add_patch(plt.Circle((self.coords[i][0], self.coords[i][1]), circle_size, zorder=2, edgecolor='k', facecolor=color_table))
+
+        else: # sequence is passed
+            if len(sequence) != len(self.coords):
+                raise ValueError("Sequence and structure must have the same length.")
+        
+            if isinstance(circle_color, list):
+                color_table = {'A': circle_color[0], 'C': circle_color[1], 'G': circle_color[2], 'U': circle_color[3], 'T': circle_color[3]}
+            else:
+                color_table = {'A': circle_color, 'C': circle_color, 'G': circle_color, 'U': circle_color, 'T': circle_color}
+
+            for i in range(len(self.coords)):
+                self.ax.add_patch(plt.Circle((self.coords[i][0], self.coords[i][1]), circle_size, zorder=2, edgecolor='k', facecolor=color_table[sequence[i]]))
+                
+    def plot_sequence(self, sequence: str, kwargs: dict={'fontsize': 12, 'color': 'k'}):
         if len(sequence) != len(self.coords):
             raise ValueError("Sequence and structure must have the same length.")
-        
-        if isinstance(circle_color, list):
-            color_table = {'A': circle_color[0], 'C': circle_color[1], 'G': circle_color[2], 'U': circle_color[3], 'T': circle_color[3]}
-        else:
-            color_table = {'A': circle_color, 'C': circle_color, 'G': circle_color, 'U': circle_color, 'T': circle_color}
-
-        if fntsz == 0: 
-            for i in range(len(sequence)):
-                self.ax.add_patch(plt.Circle((self.coords[i][0], self.coords[i][1]), circle_size, zorder=2, edgecolor='k', facecolor=color_table[sequence[i]]))
-
-        else:
-            for i in range(len(sequence)):
-                self.ax.add_patch(plt.Circle((self.coords[i][0], self.coords[i][1]), circle_size, zorder=2, edgecolor='k', facecolor=color_table[sequence[i]]))
-                plt.text(self.coords[i][0], self.coords[i][1], sequence[i], ha='center', va='center', fontsize=fntsz, zorder=3)
+    
+        for i in range(len(sequence)):
+            plt.text(self.coords[i][0], self.coords[i][1], sequence[i], ha='center', va='center', zorder=3, **kwargs)
