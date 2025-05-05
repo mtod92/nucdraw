@@ -5,10 +5,10 @@ from typing import List, Tuple
 from utils import rotate, flatten
 
 class NucDraw:
-    def __init__(self, dot_bracket_structure):
+    def __init__(self, dot_bracket_structure: str):
         self.dot_bracket_structure = dot_bracket_structure
     
-    def generate(self, spacer=1, degree=0):
+    def generate(self, spacer: int=1, degree: float=0.0):
         self.generate_db_structure(spacer)
         self.generate_coordinates_and_pairs(degree)
 
@@ -56,10 +56,10 @@ class NucDraw:
         
         return pairs
 
-    def plotter(self, sz=5, 
-                 bckwargs={'lw':1, 'color':'k'}, 
-                 bpkwargs={'lw':1, 'c':'red'}, 
-                 scwargs={'s':10, 'c':'k'}):
+    def plotter(self, sz: float=5.0, 
+                 bckwargs: dict={'lw':1, 'color':'k'}, 
+                 bpkwargs: dict={'lw':1, 'c':'red'}, 
+                 scwargs: dict={'s':10, 'c':'k'}):
         fig, ax = plt.subplots(figsize=(sz, sz))
 
         # Manually retrieve paired bases and relative coordinates to plot linkers
@@ -103,3 +103,21 @@ class NucDraw:
         ax.set_axis_off()
         
         self.ax = ax
+
+    def plot_sequence(self, sequence: str, fntsz: int = 12, circle_size: float=5, circle_color = ['#1ea3eb', '#f5370c', '#22c716', '#e6d815']):
+        if len(sequence) != len(self.coords):
+            raise ValueError("Sequence and structure must have the same length.")
+        
+        if isinstance(circle_color, list):
+            color_table = {'A': circle_color[0], 'C': circle_color[1], 'G': circle_color[2], 'U': circle_color[3], 'T': circle_color[3]}
+        else:
+            color_table = {'A': circle_color, 'C': circle_color, 'G': circle_color, 'U': circle_color, 'T': circle_color}
+
+        if fntsz == 0: 
+            for i in range(len(sequence)):
+                self.ax.add_patch(plt.Circle((self.coords[i][0], self.coords[i][1]), circle_size, zorder=2, edgecolor='k', facecolor=color_table[sequence[i]]))
+
+        else:
+            for i in range(len(sequence)):
+                self.ax.add_patch(plt.Circle((self.coords[i][0], self.coords[i][1]), circle_size, zorder=2, edgecolor='k', facecolor=color_table[sequence[i]]))
+                plt.text(self.coords[i][0], self.coords[i][1], sequence[i], ha='center', va='center', fontsize=fntsz, zorder=3)
