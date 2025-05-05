@@ -133,3 +133,15 @@ class NucDraw:
     
         for i in range(len(sequence)):
             plt.text(self.coords[i][0], self.coords[i][1], sequence[i], ha='center', va='center', zorder=3, **kwargs)
+
+    def multistrand_coloring(self, clr=[], bckwargs: dict={'lw':1}):
+
+        if len(self.l) > 1: # check that it is indeed a complex
+            for i in range(len(self.l)):
+                idx = range(sum(self.l[:i]), sum(self.l[:i+1]))
+                self.ax.plot(self.coords[idx, 0], self.coords[idx, 1], **bckwargs, color=clr[i], zorder=1)
+            
+        else:
+            raise ValueError("This function should be used for multi-stranded complexes.")
+
+
