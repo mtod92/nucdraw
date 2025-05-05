@@ -59,7 +59,7 @@ class NucDraw:
     def plotter(self, sz: float=5.0, 
                  bckwargs: dict={'lw':1, 'color':'k'}, 
                  bpkwargs: dict={'lw':1, 'c':'red'}, 
-                 scwargs: dict={'s':10, 'c':'k'}):
+                 scwargs: dict={'s':0, 'c':'k'}):
         fig, ax = plt.subplots(figsize=(sz, sz))
 
         # Manually retrieve paired bases and relative coordinates to plot linkers
@@ -126,7 +126,7 @@ class NucDraw:
 
             for i in range(len(self.coords)):
                 self.ax.add_patch(plt.Circle((self.coords[i][0], self.coords[i][1]), circle_size, zorder=2, edgecolor='k', facecolor=color_table[sequence[i]]))
-                
+
     def plot_sequence(self, sequence: str, kwargs: dict={'fontsize': 12, 'color': 'k'}):
         if len(sequence) != len(self.coords):
             raise ValueError("Sequence and structure must have the same length.")
