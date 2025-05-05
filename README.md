@@ -1,7 +1,14 @@
+NucDraw is a simple Python package inspired by Forgi for the creation of NUCleic acid structures DRAWings.
+It relies on viennaRNA and matplotlib to convert 1D dot-bracket structures into easily to interpret 2D drawings.
+
+This package is well-suited to generate many structures in an automated way from multiplexed and high-throughput data, and allows to visualize multiple strands without pseudo-knots.
+
+Several functionalities are included to allow the customization of your graphs.
+See the following examples.
+
+
 ```python
 from core import NucDraw
-# pip install git+https://github.com/yourusername/nucdraw
-
 ```
 
 
@@ -19,7 +26,7 @@ nc.plotter(8, bckwargs={'lw':2, 'color':'k'}, bpkwargs={'lw':2, 'c':'red'}, scwa
 
 
     
-![png](README_files/README_1_0.png)
+![png](README_files/README_2_0.png)
     
 
 
@@ -42,7 +49,7 @@ nc.plot_sequence(seq, {'fontsize':8, 'color':'k'})
 
 
     
-![png](README_files/README_2_0.png)
+![png](README_files/README_3_0.png)
     
 
 
@@ -66,7 +73,7 @@ nc.plot_sequence(seq, {'fontsize':8, 'color':'k'})
 
 
     
-![png](README_files/README_3_0.png)
+![png](README_files/README_4_0.png)
     
 
 
@@ -87,7 +94,7 @@ nc.plot_circles(seq, circle_size = 3, circle_color='white')
 
 
     
-![png](README_files/README_4_0.png)
+![png](README_files/README_5_0.png)
     
 
 
@@ -110,6 +117,6 @@ nc.multistrand_coloring(clr=['red', 'blue', 'green'], bckwargs={'lw' : 3})
 
 
     
-![png](README_files/README_5_0.png)
+![png](README_files/README_6_0.png)
     
 
