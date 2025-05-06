@@ -9,6 +9,9 @@ pip install git+https://github.com/mtod92/nucdraw
 Several functionalities are included to allow the customization of your graphs.
 See the following examples.
 
+If you use this package for your project, please remember to cite:
+10.5281/zenodo.15351036
+
 
 ```python
 from nucdraw import NucDraw
