@@ -8,7 +8,7 @@ This package is well-suited to generate many structures in an automated way from
 To install simply run from terminal:
 - pip install nucdraw
 
-If you use this package for your project, please remember to cite:\
+If you use this package for your project, please remember to cite:
 - 10.5281/zenodo.15352138
 
 Several functionalities are included to allow the customization of your graphs.
