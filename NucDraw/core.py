@@ -2,7 +2,7 @@ import RNA
 import numpy as np
 import matplotlib.pyplot as plt
 from typing import List, Tuple
-from utils import rotate, flatten
+from .utils import rotate, flatten
 
 class NucDraw:
     def __init__(self, dot_bracket_structure: str):
