@@ -10,7 +10,6 @@ authors = [
     {name = "Marco Todisco", email = "marco.todisco.92@gmail.com"}
 ]
 readme = "README.md"
-license = {text = "MIT"}
 requires-python = ">=3.7"
 dependencies = [
     "matplotlib",
