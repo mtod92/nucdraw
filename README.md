@@ -4,6 +4,8 @@ It relies on viennaRNA and matplotlib to convert 1D dot-bracket structures into 
 This package is well-suited to generate many structures in an automated way from multiplexed and high-throughput data, and allows to visualize multiple strands without pseudo-knots.
 
 To install simply run from terminal:
+pip install nucdraw
+or alternatively:
 pip install git+https://github.com/mtod92/nucdraw
 
 Several functionalities are included to allow the customization of your graphs.
