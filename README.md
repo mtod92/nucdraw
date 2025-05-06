@@ -1,19 +1,18 @@
+[![DOI](https://zenodo.org/badge/978270786.svg)](https://doi.org/10.5281/zenodo.15351035)
+
 NucDraw is a simple Python package inspired by Forgi for the creation of NUCleic acid structures DRAWings.
 It relies on viennaRNA and matplotlib to convert 1D dot-bracket structures into easily to interpret 2D drawings.
 
 This package is well-suited to generate many structures in an automated way from multiplexed and high-throughput data, and allows to visualize multiple strands without pseudo-knots.
 
 To install simply run from terminal:\
-pip install nucdraw\
-or alternatively:\
-pip install git+https://github.com/mtod92/nucdraw
+- pip install nucdraw\
+
+If you use this package for your project, please remember to cite:\
+10.5281/zenodo.15352138
 
 Several functionalities are included to allow the customization of your graphs.
 See the following examples.
-
-If you use this package for your project, please remember to cite:\
-10.5281/zenodo.15351036
-
 
 ```python
 from nucdraw import NucDraw
