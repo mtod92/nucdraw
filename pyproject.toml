@@ -7,7 +7,7 @@ packages = ["nucdraw"]
 
 [project]
 name = "nucdraw"
-version = "0.1.0"
+version = "0.1.1"
 description = "Draw nucleic acid structures"
 authors = [
     {name = "Marco Todisco", email = "marco.todisco.92@gmail.com"}
