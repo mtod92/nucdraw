@@ -1,4 +1,4 @@
-[![DOI](https://zenodo.org/badge/978270786.svg)](https://doi.org/10.5281/zenodo.15351035)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15634860.svg)](https://doi.org/10.5281/zenodo.15634860)
 
 NucDraw is a simple Python package inspired by Forgi for the creation of NUCleic acid structures DRAWings.
 It relies on viennaRNA and matplotlib to convert 1D dot-bracket structures into easily to interpret 2D drawings.
