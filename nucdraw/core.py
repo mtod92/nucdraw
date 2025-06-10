@@ -2,7 +2,7 @@ import RNA
 import numpy as np
 import matplotlib.pyplot as plt
 from typing import List, Tuple
-from .utils import rotate, flatten
+from .utils import rotate, flatten, compute_repulsion_vectors
 
 class NucDraw:
     def __init__(self, dot_bracket_structure: str):
@@ -143,5 +143,48 @@ class NucDraw:
             
         else:
             raise ValueError("This function should be used for multi-stranded complexes.")
+
+    def numbering_inside(self, kwargs: dict={'fontsize': 12, 'color': 'k'}):
+        if len(self.l) > 1: # check that it is indeed a complex
+            for i in range(len(self.l)):
+                idx = range(sum(self.l[:i]), sum(self.l[:i+1]))
+                for count, j in enumerate(idx):
+                    self.ax.text(self.coords[j][0], self.coords[j][1], count, ha='center', va='center', zorder=3, **kwargs)            
+        else:
+            for i in range(len(self.coords)):
+                self.ax.text(self.coords[i][0], self.coords[i][1], i, ha='center', va='center', zorder=3, **kwargs)       
+
+    def numbering_outside(self, v = 5, k = 2, spacing = 10, kwargs: dict={'fontsize': 12, 'color': 'k'}):
+        arrows = compute_repulsion_vectors(self.coords, k)
+
+        if len(self.l) > 1: # check that it is indeed a complex
+            for i in range(len(self.l)):
+                idx = range(sum(self.l[:i]), sum(self.l[:i+1]))
+
+                if type(spacing) != list:
+                    list_of_numbers = np.arange(idx[0], idx[-1], spacing)
+                else:
+                    list_of_numbers = np.array(spacing)+idx[0]
+
+                for j in list_of_numbers:
+                    try:
+                        self.ax.text(self.coords[int(j)][0]+v*arrows[int(j), 0], self.coords[int(j)][1]+v*arrows[int(j), 1], j-idx[0], ha='center', va='center', zorder=3, **kwargs)
+                        self.ax.plot([self.coords[int(j)][0]+v*arrows[int(j), 0]*0.2, self.coords[int(j)][0]+v*arrows[int(j), 0]*0.8], [self.coords[int(j)][1]+v*arrows[int(j), 1]*0.1, self.coords[int(j)][1]+v*arrows[int(j), 1]*0.8], lw=1, c='k')
+                    except:
+                        print(j-idx[0], "exceeds the length of the structure #", i, ".")
+        else:
+            if type(spacing) != list:
+                list_of_numbers = np.arange(0, len(self.coords), spacing)
+            else:
+                list_of_numbers = spacing
+                
+            for i in list_of_numbers:
+                try:
+                    self.ax.text(self.coords[int(i)][0]+v*arrows[int(i), 0], self.coords[int(i)][1]+v*arrows[int(i), 1], int(i), ha='center', va='center', zorder=3, **kwargs)
+                    self.ax.plot([self.coords[int(i)][0]+v*arrows[int(i), 0]*0.2, self.coords[int(i)][0]+v*arrows[int(i), 0]*0.8], [self.coords[int(i)][1]+v*arrows[int(i), 1]*0.1, self.coords[int(i)][1]+v*arrows[int(i), 1]*0.8], lw=1, c='k')
+                except:
+                    print(i, "exceeds the length of the structure.")
+
+
 
 
