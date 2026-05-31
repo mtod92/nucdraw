@@ -50,7 +50,7 @@ mfe = mfe[:50]
 nc = NucDraw(mfe)
 nc.generate(degree=90)
 nc.plotter(8, bckwargs={'lw':2, 'color':'k'}, bpkwargs={'lw':2, 'c':'red'}, scwargs={'s':10, 'c':'k'})
-nc.plot_circles(circle_size = 4, circle_color='white')
+nc.plot_circles(ckwargs={'radius': 4, 'edgecolor': 'k', 'facecolor': 'white'})
 nc.plot_sequence(seq, {'fontsize':8, 'color':'k'})
 
 # Let's annotate with numbers.
@@ -87,7 +87,7 @@ mfe = mfe[:50]
 nc = NucDraw(mfe)
 nc.generate(degree=90)
 nc.plotter(8, bckwargs={'lw':2, 'color':'k'}, bpkwargs={'lw':2, 'c':'k'}, scwargs={'s':10, 'c':'k'})
-nc.plot_circles(seq, circle_size = 4)
+nc.plot_circles(seq, ckwargs={'radius': 4, 'edgecolor': 'k'})
 nc.plot_sequence(seq, {'fontsize':8, 'color':'k'})
 ```
 
@@ -109,7 +109,7 @@ mfe = '..((((..(((....+.))))).)).'
 nc = NucDraw(mfe)
 nc.generate()
 nc.plotter(6, bckwargs={'lw':2, 'color':'k'}, bpkwargs={'lw':3, 'c':'k'}, scwargs={'s':10, 'c':'k'})
-nc.plot_circles(seq, circle_size = 3, circle_color='white')
+nc.plot_circles(seq, ckwargs={'radius': 3, 'edgecolor': 'k', 'facecolor': 'white'})
 ```
 
 
@@ -131,7 +131,7 @@ mfe = '..((((..(((....+.))))).)).(((((+..)))))'
 nc = NucDraw(mfe)
 nc.generate()
 nc.plotter(8, bckwargs={'lw':2, 'color':'k'}, bpkwargs={'lw':3, 'c':'k'}, scwargs={'s':10, 'c':'k'})
-nc.plot_circles(seq, circle_size = 2, circle_color='white')
+nc.plot_circles(seq, ckwargs={'radius': 2, 'edgecolor': 'k', 'facecolor': 'white'})
 nc.multistrand_coloring(clr=['red', 'blue', 'green'], bckwargs={'lw' : 3})
 
 # Let's annotate with numbers.
@@ -166,7 +166,7 @@ mfe = '..((((..(((....+.))))).)).(((((+..)))))'
 nc = NucDraw(mfe)
 nc.generate()
 nc.plotter(8, bckwargs={'lw':2, 'color':'k'}, bpkwargs={'lw':3, 'c':'k'}, scwargs={'s':10, 'c':'k'})
-nc.plot_circles(seq, circle_size = 2, circle_color='white')
+nc.plot_circles(seq, ckwargs={'radius': 2, 'edgecolor': 'k', 'facecolor': 'white'})
 nc.multistrand_coloring(clr=['red', 'blue', 'green'], bckwargs={'lw' : 3})
 
 # Let's annotate with numbers in custom positions [3, 5, 8, 24].
